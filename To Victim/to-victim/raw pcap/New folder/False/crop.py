@@ -7,48 +7,53 @@ def split_pcap(input_file):
     if not os.path.exists("cropped"):
         os.makedirs("cropped")
 
-    # Load the pcap file
-    packets = rdpcap(input_file)
-
     # Get the base name of the input file
     base_name = os.path.splitext(os.path.basename(input_file))[0]
-
-    # Get the first packet's timestamp
-    start_time = packets[0].time
 
     # Define the time interval (5 seconds)
     interval = 5
 
-    # Initialize variables for packet counts and file index
-    packet_count = 0
+    # Initialize variables for file index
     file_index = 1
 
     # Initialize a list to store packets for the current interval
     interval_packets = []
 
-    # Loop through each packet in the pcap file with tqdm progress bar
-    for packet in tqdm(packets, desc=f"Splitting {input_file}", unit=" packets"):
-        # Calculate the elapsed time since the start of the capture
-        elapsed_time = packet.time - start_time
+    # Get the total number of packets in the pcap file
+    total_packets = sum(1 for _ in PcapReader(input_file))
 
-        # Check if elapsed time exceeds the interval
-        if elapsed_time >= interval:
-            # Write the interval packets to a new pcap file
-            output_file = f"cropped/{base_name}_{file_index}.pcap"
-            wrpcap(output_file, interval_packets)
+    # Open the pcap file in read mode
+    with PcapReader(input_file) as pcap_reader:
+        # Initialize tqdm progress bar with total number of packets
+        progress_bar = tqdm(total=total_packets, desc=f"Splitting {input_file}", unit=" packets")
 
-            # Reset variables for the next interval
-            interval_packets = []
-            start_time = packet.time
-            file_index += 1
+        # Loop through each packet in the pcap file
+        for packet in pcap_reader:
+            # Calculate the elapsed time since the start of the capture
+            elapsed_time = packet.time - interval_packets[0].time if interval_packets else 0
 
-        # Add the packet to the current interval
-        interval_packets.append(packet)
-        packet_count += 1
+            # Check if elapsed time exceeds the interval
+            if elapsed_time >= interval:
+                # Write the interval packets to a new pcap file
+                output_file = f"cropped/{base_name}_{file_index}.pcap"
+                wrpcap(output_file, interval_packets)
+
+                # Reset variables for the next interval
+                interval_packets = [packet]
+                file_index += 1
+            else:
+                # Add the packet to the current interval
+                interval_packets.append(packet)
+
+            # Update the progress bar
+            progress_bar.update(1)
 
     # Write the remaining packets to a pcap file
     output_file = f"cropped/{base_name}_{file_index}.pcap"
     wrpcap(output_file, interval_packets)
+
+    # Close the progress bar
+    progress_bar.close()
 
     print(f"Split {input_file} into {file_index} parts successfully.")
 
