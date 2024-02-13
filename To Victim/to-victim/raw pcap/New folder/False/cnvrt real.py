@@ -2,6 +2,7 @@ from scapy.all import *
 import pandas as pd
 import os
 from math import log2
+from tqdm import tqdm  # Import tqdm for progress bar
 
 # Function to calculate entropy
 def calculate_entropy(data):
@@ -52,9 +53,7 @@ def extract_features_from_pcap(pcap_file):
 
 # Iterate over pcap files in the directory
 pcap_files = [file for file in os.listdir() if file.endswith('.pcap')]
-for pcap_file in pcap_files:
-    print(f'Processing {pcap_file}...')
+for pcap_file in tqdm(pcap_files, desc="Processing PCAP files"):  # Add tqdm for progress bar
     features = extract_features_from_pcap(pcap_file)
     filename = os.path.splitext(pcap_file)[0] + '.csv'
     pd.DataFrame([features]).to_csv(filename, index=False)
-    print(f'Features extracted and saved to {filename}')
