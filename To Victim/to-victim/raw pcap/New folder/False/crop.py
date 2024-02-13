@@ -27,6 +27,10 @@ def split_pcap(input_file):
         # Initialize tqdm progress bar with total number of packets
         progress_bar = tqdm(total=total_packets, desc=f"Splitting {input_file}", unit=" packets")
 
+        # Set the number of packets to process before updating the progress bar
+        update_interval = 2000
+        packets_processed = 0
+
         # Loop through each packet in the pcap file
         for packet in pcap_reader:
             # Calculate the elapsed time since the start of the capture
@@ -45,12 +49,14 @@ def split_pcap(input_file):
                 # Add the packet to the current interval
                 interval_packets.append(packet)
 
-            # Update the progress bar
-            progress_bar.update(1)
+            packets_processed += 1
+            if packets_processed >= update_interval:
+                # Update the progress bar
+                progress_bar.update(packets_processed)
+                packets_processed = 0
 
-    # Write the remaining packets to a pcap file
-    output_file = f"cropped/{base_name}_{file_index}.pcap"
-    wrpcap(output_file, interval_packets)
+        # Update the progress bar with the remaining packets processed
+        progress_bar.update(packets_processed)
 
     # Close the progress bar
     progress_bar.close()
