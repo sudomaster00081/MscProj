@@ -13,19 +13,17 @@ def split_pcap(input_file):
     # Define the time interval (5 seconds)
     interval = 5
 
-    # Initialize variables for file index
+    # Initialize variables for file index and packet count
     file_index = 1
-
-    # Initialize a list to store packets for the current interval
-    interval_packets = []
+    packet_count = 0
 
     # Open the pcap file in read mode
     with PcapReader(input_file) as pcap_reader:
-        # Get the total number of packets in the pcap file
-        total_packets = os.path.getsize(input_file) // 1024
+        # Initialize tqdm progress bar
+        progress_bar = tqdm(desc=f"Splitting {input_file}", unit=" packets")
 
-        # Initialize tqdm progress bar with total number of packets
-        progress_bar = tqdm(total=total_packets, desc=f"Splitting {input_file}", unit="KB")
+        # Initialize list to store packets for the current interval
+        interval_packets = []
 
         # Loop through each packet in the pcap file
         for packet in pcap_reader:
@@ -45,11 +43,14 @@ def split_pcap(input_file):
                 # Add the packet to the current interval
                 interval_packets.append(packet)
 
-            # Update the progress bar
-            progress_bar.update(len(packet))
+            # Increment packet count
+            packet_count += 1
 
-    # Close the progress bar
-    progress_bar.close()
+            # Update the progress bar
+            progress_bar.update(1)
+
+        # Close the progress bar
+        progress_bar.close()
 
     print(f"Split {input_file} into {file_index} parts successfully.")
 
