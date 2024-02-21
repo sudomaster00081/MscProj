@@ -1,0 +1,96 @@
+        Supervised Learning Models:
+    Linear Models:
+Linear Regression
+Logistic Regression
+Ridge Regression
+Lasso Regression
+ElasticNet Regression
+Polynomial Regression
+    Tree-Based Models:
+Decision Trees
+Random Forest
+Gradient Boosting Machines (GBM)
+XGBoost
+LightGBM
+CatBoost
+Extra Trees
+    Support Vector Machines (SVM):
+SVM for Classification
+SVM for Regression
+    Nearest Neighbors Models:
+k-Nearest Neighbors (kNN)
+Radius Neighbors Classifier
+    Naive Bayes:
+Gaussian Naive Bayes
+Multinomial Naive Bayes
+Bernoulli Naive Bayes
+    Neural Network Models:
+Multi-Layer Perceptron (MLP)
+Convolutional Neural Networks (CNN)
+Recurrent Neural Networks (RNN)
+Long Short-Term Memory (LSTM)
+Gated Recurrent Units (GRU)
+Transformer Models (e.g., BERT, GPT)
+    Ensemble Methods:
+Voting Classifier
+Bagging Classifier
+AdaBoost
+Stacking Classifier
+        Unsupervised Learning Models:
+    Clustering Models:
+K-Means Clustering
+Hierarchical Clustering
+DBSCAN
+Mean Shift
+Gaussian Mixture Models (GMM)
+    Dimensionality Reduction:
+Principal Component Analysis (PCA)
+Linear Discriminant Analysis (LDA)
+t-Distributed Stochastic Neighbor Embedding (t-SNE)
+Autoencoders
+        Semi-Supervised Learning Models:
+    Self-training Models:
+Self-training Classifier
+Self-training Generative Models (e.g., Variational Autoencoders)
+        Reinforcement Learning Models:
+    Q-Learning:
+Q-Learning
+Deep Q-Networks (DQN)
+    Policy Gradient Methods:
+REINFORCE
+Proximal Policy Optimization (PPO)
+Trust Region Policy Optimization (TRPO)
+    Actor-Critic Methods:
+Advantage Actor-Critic (A2C)
+Deep Deterministic Policy Gradient (DDPG)
+Twin Delayed DDPG (TD3)
+    Evolutionary Algorithms:
+Genetic Algorithms
+Genetic Programming
+        Other Models:
+    Anomaly Detection Models:
+Isolation Forest
+One-Class SVM
+Autoencoder-based methods
+    Time Series Forecasting Models:
+ARIMA
+Seasonal Decomposition of Time Series (STL)
+Prophet
+Long Short-Term Memory (LSTM)
+Gaussian Processes
+    Survival Analysis Models:
+Cox Proportional Hazards Model
+Accelerated Failure Time (AFT) Model
+    Imbalanced Data Handling Models:
+Synthetic Minority Over-sampling Technique (SMOTE)
+Adaptive Synthetic (ADASYN)
+Random Over-sampling and Under-sampling
+    Interpretable Models:
+Rule-Based Models (e.g., Decision Trees, RuleFit)
+Linear Models with Regularization
+Partial Dependence Plots (PDP)
+SHAP (SHapley Additive exPlanations)
+    Fuzzy Logic Models:
+Fuzzy C-Means Clustering
+Mamdani Fuzzy Systems
+Sugeno Fuzzy Systems
