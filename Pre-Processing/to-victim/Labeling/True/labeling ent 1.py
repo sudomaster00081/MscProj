@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the CSV file
-filename = "combined True.csv"  # Replace "your_csv_file.csv" with the actual filename
+filename = "combined 1s 1.csv"  # Replace "your_csv_file.csv" with the actual filename
 df = pd.read_csv(filename)
 
 # Add a column named "label" with integer value 0
