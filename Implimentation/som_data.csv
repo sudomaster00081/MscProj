@@ -1,4 +1,4 @@
-src_ip_entropy, src_port_entropy, dst_port_entropy, protocol_entropy, total_packets, label
+src_ip_entropy,src_port_entropy,dst_port_entropy,protocol_entropy,total_packets,label
 1.0,-0.0,-0.0,-0.0,0,0
 1.0,-0.0,-0.0,-0.0,8,0
 1.0,-0.0,-0.0,-0.0,16,0
